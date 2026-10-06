@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Typing Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <main class="container">
+    <!-- Header: title + high score -->
+    <header class="header">
+      <h1>Typing<span>Game</span></h1>
+      <p class="subtitle">Type as many words as you can in 60 seconds</p>
+      <div class="high-score-badge">
+        🏆 Best: <span id="high-score">0</span>
+      </div>
+    </header>
+
+    <!-- Stats bar: timer, score, live WPM, accuracy -->
+    <section class="stats">
+      <div class="stat">
+        <span class="stat-label">Time</span>
+        <span class="stat-value" id="time">60</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Score</span>
+        <span class="stat-value" id="score">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">WPM</span>
+        <span class="stat-value" id="wpm">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Accuracy</span>
+        <span class="stat-value" id="accuracy">100%</span>
+      </div>
+    </section>
+
+    <!-- Correct / incorrect counters -->
+    <section class="count-row">
+      <span class="pill pill-correct">✓ Correct: <span id="correct-count">0</span></span>
+      <span class="pill pill-wrong">✗ Wrong: <span id="incorrect-count">0</span></span>
+    </section>
+
+    <!-- START SCREEN -->
+    <section id="start-screen" class="card">
+      <h2>Ready to type?</h2>
+      <p>
+        A word will appear on the screen.<br />
+        Type it and press <strong>Space</strong> to submit.
+      </p>
+      <button id="start-btn" class="btn">Start Game</button>
+    </section>
+
+    <!-- GAME SCREEN (hidden at first) -->
+    <section id="game-screen" class="card hidden">
+      <div id="word-display" class="word-display">ready</div>
+      <input
+        type="text"
+        id="input-field"
+        class="input-field"
+        placeholder="Start typing here..."
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        disabled
+      />
+      <p class="hint">Type the word above + press Space</p>
+    </section>
+
+    <!-- RESULT / GAME OVER SCREEN (hidden at first) -->
+    <section id="result-screen" class="card hidden">
+      <h2>⏱ Time's Up!</h2>
+      <p id="new-best" class="new-best hidden">🎉 New Best Score!</p>
+      <div class="result-grid">
+        <div><span>Final Score</span><strong id="final-score">0</strong></div>
+        <div><span>WPM</span><strong id="final-wpm">0</strong></div>
+        <div><span>Accuracy</span><strong id="final-accuracy">0%</strong></div>
+        <div><span>Correct</span><strong id="final-correct" class="green">0</strong></div>
+        <div><span>Wrong</span><strong id="final-wrong" class="red">0</strong></div>
+        <div><span>Best Score</span><strong id="final-best">0</strong></div>
+      </div>
+      <button id="restart-btn" class="btn">Restart Game</button>
+    </section>
+
+    <footer class="footer">
+      <p>Built with HTML • CSS • Vanilla JS</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

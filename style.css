@@ -1,0 +1,310 @@
+/* =========================
+   TYPING GAME — dark / black-and-white theme
+   Clean, modern, responsive, beginner-friendly
+   ========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0b0b0b;
+  color: #eeeeee;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 24px 16px;
+  line-height: 1.6;
+}
+
+/* Main centered container */
+.container {
+  width: 100%;
+  max-width: 620px;
+}
+
+/* ---------- Header ---------- */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+  animation: fadeIn 0.5s ease;
+}
+
+.header h1 {
+  font-size: clamp(32px, 6vw, 48px);
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.header h1 span {
+  background: #ffffff;
+  color: #000000;
+  padding: 0 10px;
+  margin-left: 6px;
+}
+
+.subtitle {
+  color: #aaaaaa;
+  margin: 8px 0 14px;
+}
+
+.high-score-badge {
+  display: inline-block;
+  border: 1px solid #333;
+  background: #151515;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* ---------- Stats bar ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.stat {
+  background: #151515;
+  border: 1px solid #262626;
+  text-align: center;
+  padding: 12px 4px;
+}
+
+.stat-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #888888;
+}
+
+.stat-value {
+  display: block;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+/* Red warning when time is low */
+.stat-value.danger {
+  color: #ff5555;
+  animation: pulse 1s infinite;
+}
+
+/* ---------- Correct / wrong pills ---------- */
+.count-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.pill {
+  font-size: 13px;
+  font-weight: bold;
+  padding: 6px 14px;
+  border: 1px solid #333;
+  background: #111;
+}
+
+.pill-correct {
+  color: #4ade80;
+}
+
+.pill-wrong {
+  color: #ff5555;
+}
+
+/* ---------- Cards (start / game / result) ---------- */
+.card {
+  background: #111111;
+  border: 1px solid #262626;
+  padding: 36px 28px;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.card h2 {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.card p {
+  color: #aaaaaa;
+  margin-bottom: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ---------- Word display (main focus) ---------- */
+.word-display {
+  font-size: clamp(36px, 8vw, 56px);
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin-bottom: 22px;
+  min-height: 80px;
+  animation: popIn 0.25s ease;
+}
+
+/* ---------- Typing input (main focus) ---------- */
+.input-field {
+  width: 100%;
+  padding: 16px;
+  font-size: 22px;
+  text-align: center;
+  color: #ffffff;
+  background: #0b0b0b;
+  border: 2px solid #333;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-field:focus {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+}
+
+/* Live feedback: green = prefix correct, red = mistake */
+.input-field.good {
+  border-color: #4ade80;
+}
+
+.input-field.bad {
+  border-color: #ff5555;
+}
+
+/* Flash animation on submit */
+.input-field.flash-good {
+  animation: flashGreen 0.3s ease;
+}
+
+.input-field.flash-bad {
+  animation: flashRed 0.3s ease;
+  border-color: #ff5555;
+}
+
+.hint {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #666666;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 14px 36px;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #000000;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.btn:hover {
+  background: transparent;
+  color: #ffffff;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* ---------- Result screen ---------- */
+.new-best {
+  color: #4ade80;
+  font-weight: bold;
+  font-size: 18px;
+  animation: popIn 0.4s ease;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 20px 0 26px;
+}
+
+.result-grid div {
+  background: #0b0b0b;
+  border: 1px solid #262626;
+  padding: 14px 6px;
+}
+
+.result-grid span {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #888888;
+}
+
+.result-grid strong {
+  font-size: 24px;
+}
+
+.green { color: #4ade80; }
+.red { color: #ff5555; }
+
+/* ---------- Footer ---------- */
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  color: #555555;
+  font-size: 13px;
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes flashGreen {
+  0% { border-color: #4ade80; background: rgba(74, 222, 128, 0.15); }
+  100% { border-color: #333; background: #0b0b0b; }
+}
+
+@keyframes flashRed {
+  0%, 50% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* ---------- Mobile / responsive ---------- */
+@media (max-width: 480px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    padding: 28px 18px;
+  }
+
+  .result-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .input-field {
+    font-size: 20px;
+  }
+}
