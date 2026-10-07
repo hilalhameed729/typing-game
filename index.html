@@ -16,6 +16,11 @@
       <div class="high-score-badge">
         🏆 Best: <span id="high-score">0</span>
       </div>
+      <!-- Current player bar -->
+      <div class="player-bar">
+        <span class="player-name">👤 <span id="current-username">Guest</span></span>
+        <button id="change-username-btn" class="btn-small" type="button">Change Username</button>
+      </div>
     </header>
 
     <!-- Stats bar: timer, score, live WPM, accuracy -->
@@ -74,21 +79,65 @@
     <section id="result-screen" class="card hidden">
       <h2>⏱ Time's Up!</h2>
       <p id="new-best" class="new-best hidden">🎉 New Best Score!</p>
+      <p id="new-best-wpm" class="new-best hidden">⚡ New Best WPM!</p>
       <div class="result-grid">
-        <div><span>Final Score</span><strong id="final-score">0</strong></div>
+        <div><span>Score</span><strong id="final-score">0</strong></div>
         <div><span>WPM</span><strong id="final-wpm">0</strong></div>
         <div><span>Accuracy</span><strong id="final-accuracy">0%</strong></div>
         <div><span>Correct</span><strong id="final-correct" class="green">0</strong></div>
         <div><span>Wrong</span><strong id="final-wrong" class="red">0</strong></div>
         <div><span>Best Score</span><strong id="final-best">0</strong></div>
+        <div><span>Best WPM</span><strong id="final-best-wpm">0</strong></div>
       </div>
       <button id="restart-btn" class="btn">Restart Game</button>
+    </section>
+
+    <!-- MY STATS / PLAYER STATS -->
+    <section class="card panel">
+      <h2>My Stats</h2>
+      <div class="result-grid">
+        <div><span>Player</span><strong id="my-username" class="username-value">—</strong></div>
+        <div><span>Best Score</span><strong id="my-best-score">0</strong></div>
+        <div><span>Best WPM</span><strong id="my-best-wpm">0</strong></div>
+        <div><span>Best Accuracy</span><strong id="my-best-accuracy">0%</strong></div>
+        <div><span>Games Played</span><strong id="my-games">0</strong></div>
+        <div><span>Total Correct</span><strong id="my-correct" class="green">0</strong></div>
+        <div><span>Total Wrong</span><strong id="my-wrong" class="red">0</strong></div>
+      </div>
+      <button id="reset-data-btn" class="btn-small btn-danger" type="button">Reset My Data</button>
+    </section>
+
+    <!-- LOCAL LEADERBOARD (Top 10) -->
+    <section class="card panel">
+      <h2>🏆 Local Leaderboard</h2>
+      <p class="muted">Top 10 players on this device. Stored locally in your browser.</p>
+      <ol id="leaderboard-list" class="leaderboard"></ol>
+      <p id="leaderboard-empty" class="muted">No scores yet. Play a game to appear here.</p>
     </section>
 
     <footer class="footer">
       <p>Built with HTML • CSS • Vanilla JS</p>
     </footer>
   </main>
+
+  <!-- USERNAME MODAL (shown on first visit / change / after reset) -->
+  <div id="username-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <h2 id="username-title">Choose your username</h2>
+      <p class="muted">Saved on this device only. No account needed.</p>
+      <input
+        type="text"
+        id="username-input"
+        class="input-field modal-input"
+        placeholder="Enter username..."
+        maxlength="15"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <p id="username-error" class="error hidden">Please enter 1–15 characters (letters, numbers, _ -).</p>
+      <button id="username-save-btn" class="btn" type="button">Save</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

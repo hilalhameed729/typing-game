@@ -61,6 +61,28 @@ body {
   letter-spacing: 1px;
 }
 
+/* Current player bar under the header */
+.player-bar {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.player-name {
+  font-size: 14px;
+  font-weight: bold;
+  border: 1px solid #333;
+  background: #111111;
+  padding: 7px 14px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* ---------- Stats bar ---------- */
 .stats {
   display: grid;
@@ -127,6 +149,7 @@ body {
   padding: 36px 28px;
   text-align: center;
   animation: fadeIn 0.4s ease;
+  margin-bottom: 16px;
 }
 
 .card h2 {
@@ -137,6 +160,22 @@ body {
 .card p {
   color: #aaaaaa;
   margin-bottom: 20px;
+}
+
+/* Extra panels (My Stats / Leaderboard) keep the same card look */
+.panel h2 {
+  font-size: 22px;
+}
+
+.muted {
+  font-size: 13px;
+  color: #777777;
+}
+
+.username-value {
+  font-size: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hidden {
@@ -151,6 +190,7 @@ body {
   margin-bottom: 22px;
   min-height: 80px;
   animation: popIn 0.25s ease;
+  overflow-wrap: break-word;
 }
 
 /* ---------- Typing input (main focus) ---------- */
@@ -219,12 +259,41 @@ body {
   transform: scale(0.97);
 }
 
+/* Small secondary button (change username / reset) */
+.btn-small {
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #ffffff;
+  background: transparent;
+  border: 1px solid #444;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.btn-small:hover {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: #000000;
+}
+
+.btn-danger:hover {
+  border-color: #ff5555;
+  background: #ff5555;
+  color: #000000;
+}
+
 /* ---------- Result screen ---------- */
 .new-best {
   color: #4ade80;
   font-weight: bold;
   font-size: 18px;
   animation: popIn 0.4s ease;
+}
+
+#new-best-wpm {
+  margin-top: -12px;
 }
 
 .result-grid {
@@ -238,6 +307,7 @@ body {
   background: #0b0b0b;
   border: 1px solid #262626;
   padding: 14px 6px;
+  min-width: 0;
 }
 
 .result-grid span {
@@ -250,10 +320,110 @@ body {
 
 .result-grid strong {
   font-size: 24px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .green { color: #4ade80; }
 .red { color: #ff5555; }
+
+/* ---------- Leaderboard ---------- */
+.leaderboard {
+  list-style: none;
+  text-align: left;
+  margin: 0 0 10px;
+}
+
+.leaderboard li {
+  display: grid;
+  grid-template-columns: 36px 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid #262626;
+  background: #0b0b0b;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.leaderboard li.current {
+  border-color: #ffffff;
+}
+
+.leaderboard .rank {
+  font-weight: 900;
+  color: #888888;
+}
+
+.leaderboard .name {
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leaderboard .lb-score,
+.leaderboard .lb-wpm {
+  font-size: 13px;
+  color: #aaaaaa;
+  white-space: nowrap;
+}
+
+.leaderboard .lb-score strong,
+.leaderboard .lb-wpm strong {
+  color: #ffffff;
+}
+
+/* ---------- Username modal ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 50;
+}
+
+.modal-overlay.hidden {
+  display: none;
+}
+
+.modal {
+  width: 100%;
+  max-width: 400px;
+  background: #111111;
+  border: 1px solid #333;
+  padding: 30px 24px;
+  text-align: center;
+  animation: popIn 0.3s ease;
+}
+
+.modal h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.modal .muted {
+  margin-bottom: 16px;
+}
+
+.modal-input {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.error {
+  color: #ff5555;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.error.hidden {
+  display: none;
+}
 
 /* ---------- Footer ---------- */
 .footer {
@@ -306,5 +476,17 @@ body {
 
   .input-field {
     font-size: 20px;
+  }
+
+  .leaderboard li {
+    grid-template-columns: 28px 1fr auto;
+  }
+
+  .leaderboard .lb-wpm {
+    display: none;
+  }
+
+  .modal {
+    padding: 24px 16px;
   }
 }

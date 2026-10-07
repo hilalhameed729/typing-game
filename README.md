@@ -14,57 +14,104 @@ A fun, beginner-friendly browser typing game. Type the words shown on the screen
 - Correct and incorrect word tracking
 - Game Over result screen with final stats
 - Restart Game button (or press Enter)
-- Highest score saved with `localStorage`
 - Responsive design for desktop and mobile
 - Clean dark / black-and-white theme
+- Username system (asked once, saved locally)
+- Persistent player statistics (survive refresh / browser restart)
+- Local Top 10 leaderboard (sorted by best score)
+- My Stats / Player Stats section
+- Case-insensitive typing (`Hello` = `hello`)
+- Reset My Data option (with confirmation)
 
 ## Technologies Used
 
 - HTML
 - CSS
 - Vanilla JavaScript (no frameworks, no libraries)
-- `localStorage` for high score
+- `localStorage` for persistence (no backend, no database)
 
-## How to Run the Project
+## Username System
+
+- On first visit, a modal asks for a username (1–15 characters: letters, numbers, space, `_`, `-`).
+- The username is saved in `localStorage` (`typingGame.username`).
+- It is NOT asked again on refresh.
+- The current username is shown in the header and in My Stats.
+- Use **Change Username** to switch players. Stats and leaderboard update to the selected player.
+
+## Persistent Player Statistics
+
+Saved in `localStorage` (`typingGame.leaderboard`) per username:
+
+- username
+- best score
+- best WPM
+- best accuracy
+- games played
+- total correct (words)
+- total wrong (words)
+- total correct characters
+- total wrong characters
+
+Data remains after refreshing, closing, and reopening the browser. The old v1 key (`typingGameHighScore`) is migrated automatically so the best score is never lost.
+
+## Local Leaderboard
+
+- Shows the Top 10 players, sorted by best score (highest first).
+- Each entry shows: rank, username, best score, best WPM.
+- Same username (case-insensitive) UPDATES its existing entry — no duplicates.
+- A lower new score keeps the previous best; a higher new WPM updates best WPM.
+- Stored in `localStorage`, so it is **local to the user's browser/device and is NOT an online global leaderboard**.
+
+## Case-Insensitive Typing
+
+Typing ignores letter case:
+
+- Target `Hello` + typed `hello` = CORRECT
+- `HELLO`, `HeLlO` are also correct
+- Spaces, numbers, and punctuation still matter: target `hello!` + typed `hello` = INCORRECT (missing `!`)
+
+## How the Game Works
+
+1. Enter a username when asked (first visit only).
+2. Click **Start Game**.
+3. A word appears. Type it and press **Space** to submit.
+4. Scoring (unchanged from v1):
+   - Score = number of correct words
+   - WPM = `(correct characters / 5) / minutes`
+   - Accuracy = `correct / total typed × 100`
+5. After 60 seconds the Game Over screen shows: score, WPM, accuracy, correct, wrong, best score, best WPM — plus "New Best" badges when earned.
+6. Every finished game updates your stats and the leaderboard automatically.
+
+## How to Run It Locally
 
 No build step, no server needed.
 
-1. Download or clone this repository.
-2. Open the `typing-game` folder.
-3. Double-click `index.html` to open it in any modern browser (Chrome, Edge, Firefox).
-
-Or with Git:
-
-```bash
-git clone <your-repo-url>
-cd typing-game
-# then open index.html in your browser
-```
-
-To play:
-
-1. Click **Start Game**.
-2. Type the shown word and press **Space** to submit.
-3. Keep typing until the 60-second timer reaches zero.
-4. Check your score, WPM, and accuracy on the Game Over screen.
-5. Click **Restart Game** to play again.
-
-## Project Structure
+1. Open the `typing-game` folder.
+2. Double-click `index.html` in any modern browser (Chrome, Edge, Firefox).
 
 ```text
 typing-game/
-├── index.html   # Page structure: start, game, and result screens
-├── style.css    # Dark theme, layout, animations, responsive design
-├── script.js    # Game logic: timer, scoring, WPM, accuracy, high score
-└── README.md    # Project documentation
+├── index.html   # Start/game/result screens + modal + stats + leaderboard
+├── style.css    # Dark theme, modal, panels, leaderboard, responsive
+├── script.js    # Timer, scoring, username, persistence, leaderboard
+└── README.md    # Documentation
 ```
+
+## Reset My Data
+
+Click **Reset My Data** → confirm → only this game's keys are deleted:
+
+- `typingGame.username`
+- `typingGame.leaderboard`
+- `typingGameHighScore`
+
+No other websites' data is touched. After reset, the game asks for a username again like a first-time visit.
 
 ## Future Improvements
 
 - Multiple difficulty levels (easy / medium / hard)
 - Different game modes (time attack, endless, sentences)
-- Leaderboard
 - Sound effects
 - Typing challenges (code snippets, quotes)
 - GitHub Pages deployment
-- Online multiplayer
+- Online multiplayer (would need a backend)
